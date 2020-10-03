@@ -11,7 +11,7 @@ variable "region" {
 
 variable "default_node_size" {
   type    = string
-  default = "s-1vcpu-2gb"
+  default = "s-2vcpu-2gb"
 }
 
 variable "min_nodes" {
