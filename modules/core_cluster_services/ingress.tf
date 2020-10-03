@@ -18,7 +18,7 @@ resource "helm_release" "traefik" {
 
 data "kubernetes_service" "traefik" {
   metadata {
-    name      = "traefik-traefik"
+    name      = "traefik"
     namespace = "ingress"
   }
   depends_on = [
