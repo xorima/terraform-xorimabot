@@ -46,11 +46,11 @@ resource "helm_release" "nginx-ingress" {
     name  = "config.ssl-protocols"
     value = "TLSv1.2"
   }
-  # set {
-  #   name  = "config.ssl-ciphers"
-  #   value = join(":", var.ssl_ciphers)
+  set {
+    name  = "config.ssl-ciphers"
+    value = join(":", var.ssl_ciphers)
 
-  # }
+  }
   set {
     name  = "config.ssl-prefer-server-ciphers"
     value = true
