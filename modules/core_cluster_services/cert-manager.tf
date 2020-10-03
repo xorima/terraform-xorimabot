@@ -50,4 +50,8 @@ resource "helm_release" "cluster-issuer" {
     name  = "secretKey"
     value = "api-token"
   }
+
+  depends_on = [
+    helm_release.cert-manager,
+  ]
 }
