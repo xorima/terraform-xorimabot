@@ -25,6 +25,11 @@ resource "helm_release" "traefik" {
     value = true
   }
 
+  set {
+    name = "dashboard.domain"
+    value = "traefik.174.138.103.44.nip.io"
+  }
+
 }
 
 data "kubernetes_service" "traefik" {
