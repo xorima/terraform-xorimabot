@@ -57,8 +57,10 @@ variable "github_xorimabot_username" {
 variable "host_labelvalidator" {
   type = string
 }
+variable "host_jsonversionbumper" {
+  type = string
+}
 
-#
 locals {
   app_version = jsondecode(file("${path.module}/app_versions.json"))
 }
