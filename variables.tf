@@ -36,6 +36,10 @@ locals {
   }
 }
 
+variable "github_hmac_secret_token" {
+  type = string
+}
+
 variable "github_xorimabot_token" {
   type = string
 }
@@ -50,12 +54,11 @@ variable "github_xorimabot_username" {
   type = string
 }
 
-locals {
-  # kubernetes_public_ip     = module.kubernetes_core_cluster_services.nginx-public-ip
-  cloudflare_dns_zone_id   = data.cloudflare_zones.zone.zones.0.id
-  cloudflare_dns_zone_name = data.cloudflare_zones.zone.zones.0.name
+variable "host_labelvalidator" {
+  type = string
 }
 
+#
 locals {
   app_version = jsondecode(file("${path.module}/app_versions.json"))
 }

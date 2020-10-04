@@ -60,13 +60,3 @@ resource "helm_release" "nginx-ingress" {
     value = false
   }
 }
-
-data "kubernetes_service" "nginx-ingress" {
-  metadata {
-    name      = "nginx-ingress-nginx-ingress"
-    namespace = "ingress"
-  }
-  depends_on = [
-    helm_release.nginx-ingress,
-  ]
-}
