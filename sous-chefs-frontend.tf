@@ -45,7 +45,7 @@ resource "kubernetes_deployment" "labelvalidator-sous-chef-frontend" {
       spec {
         container {
           name  = "labelvalidator"
-          image = "xorima/github-cookstyle-runner:${local.app_version.labelvalidator}"
+          image = "xorima/labelvalidator:${local.app_version.labelvalidator}"
           env {
             name = "SECRET_TOKEN"
             value_from {
