@@ -91,7 +91,7 @@ resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
   metadata {
     name = "labelvalidator"
     annotations = {
-      "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
+      "cert-manager.io/cluster-issuer" = "letsencrypt-staging"
     }
   }
   spec {
