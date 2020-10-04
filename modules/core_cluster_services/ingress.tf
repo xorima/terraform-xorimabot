@@ -14,15 +14,8 @@ resource "helm_release" "traefik" {
   namespace       = var.namespace_ingress
   wait            = true
   cleanup_on_fail = true
-}
 
-data "kubernetes_service" "traefik" {
-  metadata {
-    name      = "traefik"
-    namespace = "ingress"
-  }
-
-  set {
+    set {
     name  = "logs.level"
     value = "INFO"
   }
@@ -30,6 +23,14 @@ data "kubernetes_service" "traefik" {
   set {
     name  = "logs.access.enabled"
     value = true
+  }
+
+}
+
+data "kubernetes_service" "traefik" {
+  metadata {
+    name      = "traefik"
+    namespace = "ingress"
   }
 
   depends_on = [
