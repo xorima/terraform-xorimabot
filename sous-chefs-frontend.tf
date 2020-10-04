@@ -89,7 +89,7 @@ resource "kubernetes_service" "labelvalidator-sous-chef-frontend" {
 
 resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
   metadata {
-    name = "labelvalidator"
+    name      = "labelvalidator"
     namespace = kubernetes_namespace.sous-chefs-frontend.metadata.0.name
     annotations = {
       "cert-manager.io/cluster-issuer" = "letsencrypt-staging"
@@ -109,7 +109,7 @@ resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
       }
     }
     tls {
-      hosts = ["${var.host_labelvalidator}.${var.cloudflare_dns_zone_filer}"]
+      hosts       = ["${var.host_labelvalidator}.${var.cloudflare_dns_zone_filer}"]
       secret_name = "labelvalidator-tls"
     }
 
