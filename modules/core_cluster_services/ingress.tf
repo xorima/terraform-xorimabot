@@ -21,6 +21,17 @@ data "kubernetes_service" "traefik" {
     name      = "traefik"
     namespace = "ingress"
   }
+
+  set {
+    name  = "logs.level"
+    value = "INFO"
+  }
+
+  set {
+    name  = "logs.access.enabled"
+    value = true
+  }
+
   depends_on = [
     helm_release.traefik,
   ]
