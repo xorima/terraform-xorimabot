@@ -59,14 +59,12 @@ resource "helm_release" "nginx-ingress" {
     name  = "config.server-tokens"
     value = false
   }
-}
-
-data "kubernetes_service" "nginx-ingress" {
-  metadata {
-    name      = "nginx-ingress-nginx-ingress"
-    namespace = "ingress"
+  set {
+    name  = "config.server-tokens"
+    value = false
   }
-  depends_on = [
-    helm_release.nginx-ingress,
-  ]
+  set {
+    name  = "controller.config.entries.use-forwarded-headers"
+    value = true
+  }
 }
