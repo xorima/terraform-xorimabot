@@ -15,7 +15,7 @@ resource "helm_release" "traefik" {
   wait            = true
   cleanup_on_fail = true
 
-    set {
+  set {
     name  = "logs.level"
     value = "INFO"
   }
