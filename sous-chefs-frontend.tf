@@ -152,6 +152,7 @@ resource "kubernetes_deployment" "jsonversionbumper-sous-chef-frontend" {
         container {
           name  = "jsonversionbumper"
           image = "xorima/json_version_bumper:${local.app_version.labelvalidator}"
+
           env {
             name = "SECRET_TOKEN"
             value_from {
@@ -161,6 +162,7 @@ resource "kubernetes_deployment" "jsonversionbumper-sous-chef-frontend" {
               }
             }
           }
+
           env {
             name = "GITHUB_TOKEN"
             value_from {
@@ -169,6 +171,16 @@ resource "kubernetes_deployment" "jsonversionbumper-sous-chef-frontend" {
                 key  = "github_token"
               }
             }
+          }
+
+          env {
+            name  = "JSON_FILE_PATH"
+            value = "app_versions.json"
+          }
+
+          env {
+            name  = "TARGET_REPO"
+            value = "xorima/terraform-xorimabot"
           }
         }
       }
