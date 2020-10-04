@@ -109,6 +109,7 @@ resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
       }
     }
     tls {
+      hosts = ["${var.host_labelvalidator}.${var.cloudflare_dns_zone_filer}"]
       secret_name = "labelvalidator-tls"
     }
 
