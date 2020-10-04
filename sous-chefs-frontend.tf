@@ -114,9 +114,9 @@ resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
   }
 }
 
-resource "cloudflare_record" "charts" {
+resource "cloudflare_record" "labelvalidator-sous-chef-frontend" {
   zone_id = local.cloudflare_dns_zone_id
-  name    = "charts"
+  name    = var.host_labelvalidator
   value   = local.kubernetes_public_ip
   type    = "A"
   ttl     = 1
