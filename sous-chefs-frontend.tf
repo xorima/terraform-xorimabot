@@ -151,7 +151,7 @@ resource "kubernetes_deployment" "jsonversionbumper-sous-chef-frontend" {
       spec {
         container {
           name  = "jsonversionbumper"
-          image = "xorima/json_version_bumper:${local.app_version.labelvalidator}"
+          image = "xorima/json_version_bumper:${local.app_version.json_version_bumper}"
 
           env {
             name = "SECRET_TOKEN"
