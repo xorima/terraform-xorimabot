@@ -27,12 +27,12 @@ resource "kubernetes_secret" "webhook-github-xorima-frontend" {
 }
 
 module "xorima-label_validator" {
-  source                   = "./modules/label_validator"
-  kube_config              = local.kube_config
-  namespace                = kubernetes_namespace.xorima-frontend.metadata[0].name
-  app_version              = local.app_version.labelvalidator
+  source             = "./modules/label_validator"
+  kube_config        = local.kube_config
+  namespace          = kubernetes_namespace.xorima-frontend.metadata[0].name
+  app_version        = local.app_version.labelvalidator
   github_secret_name = kubernetes_secret.webhook-github-xorima-frontend.metadata[0].name
-  hostname        = local.xorima_hostnames.label_validator
+  hostname           = local.xorima_hostnames.label_validator
 }
 
 
