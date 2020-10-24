@@ -2,6 +2,7 @@ locals {
   xorima_hostnames = {
     label_validator     = "${var.app_hostname_prefix.label_validator}.xorima.${local.domain_config.base_domain}"
     json_version_bumper = "${var.app_hostname_prefix.json_version_bumper}.xorima.${local.domain_config.base_domain}"
+    release_creator     = "${var.app_hostname_prefix.release_creator}.xorima.${local.domain_config.base_domain}"
   }
 }
 
@@ -55,6 +56,24 @@ module "xorima-json-version-bumper" {
   hostname           = local.xorima_hostnames.json_version_bumper
   target_repo        = "xorima/terraform-xorimabot"
   json_file_path     = "app_versions.json"
+}
+
+resource "cloudflare_record" "jsonversionbumper-xorima-frontend" {
+  zone_id = local.cloudflare_dns_zone_id
+  name    = local.xorima_hostnames.json_version_bumper
+  value   = local.kubernetes_public_ip
+  type    = "A"
+  ttl     = 1
+}
+
+
+module "xorima-release-creator" {
+  source             = "./modules/release_creator"
+  kube_config        = local.kube_config
+  namespace          = kubernetes_namespace.xorima-frontend.metadata[0].name
+  app_version        = local.app_version.release_creator
+  github_secret_name = kubernetes_secret.webhook-github-xorima-frontend.metadata[0].name
+  hostname           = local.xorima_hostnames.release_creator
 }
 
 resource "cloudflare_record" "jsonversionbumper-xorima-frontend" {
