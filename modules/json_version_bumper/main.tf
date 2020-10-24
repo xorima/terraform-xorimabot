@@ -23,11 +23,7 @@ resource "kubernetes_deployment" "deployment" {
       spec {
         container {
           name  = "json-version-bumper"
-<<<<<<< HEAD
           image = "xorima/json_version_bumper:${var.app_version}"
-=======
-          image = "xorima/jsonversionbumper:${var.app_version}"
->>>>>>> 9c6b68e2c3abf6690e5d5a14beb5131f3447037f
 
           env {
             name = "SECRET_TOKEN"
