@@ -1,6 +1,6 @@
 data "cloudflare_zones" "zone" {
   filter {
-    name   = var.cloudflare_dns_zone_filer
+    name   = local.domain_config.domain
     status = "active"
   }
 }
