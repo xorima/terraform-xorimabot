@@ -47,7 +47,7 @@ resource "cloudflare_record" "labelvalidator-xorima-frontend" {
 
 
 module "xorima-json-version-bumper" {
-  source             = "./modules/json-version-bumper"
+  source             = "./modules/json_version_bumper"
   kube_config        = local.kube_config
   namespace          = kubernetes_namespace.xorima-frontend.metadata[0].name
   app_version        = local.app_version.jsonversionbumper
