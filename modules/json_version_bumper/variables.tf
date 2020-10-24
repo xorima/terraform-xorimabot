@@ -25,8 +25,7 @@ variable "hostname" {
 variable "target_repo" {
   description = "Target repository to push updated file into"
 }
-# xorima/terraform-xorimabot
+
 variable "json_file_path" {
   description = "File path to find the json file to update"
 }
-# app_versions.json

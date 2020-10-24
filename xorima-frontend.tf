@@ -21,9 +21,9 @@ resource "kubernetes_secret" "webhook-github-xorima-frontend" {
   }
 
   data = {
-    hmac_secret_token = var.github_hmac_secret_xorima
-    github_token      = var.github_user_token
-    github_admin_token      = var.github_user_token
+    hmac_secret_token  = var.github_hmac_secret_xorima
+    github_token       = var.github_user_token
+    github_admin_token = var.github_user_token
   }
 }
 
@@ -53,6 +53,8 @@ module "xorima-json-version-bumper" {
   app_version        = local.app_version.jsonversionbumper
   github_secret_name = kubernetes_secret.webhook-github-xorima-frontend.metadata[0].name
   hostname           = local.xorima_hostnames.json_version_bumper
+  target_repo        = "xorima/terraform-xorimabot"
+  json_file_path     = "app_versions.json"
 }
 
 resource "cloudflare_record" "jsonversionbumper-xorima-frontend" {
