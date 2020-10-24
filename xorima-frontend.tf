@@ -76,9 +76,9 @@ module "xorima-release-creator" {
   hostname           = local.xorima_hostnames.release_creator
 }
 
-resource "cloudflare_record" "jsonversionbumper-xorima-frontend" {
+resource "cloudflare_record" "release-creator-xorima-frontend" {
   zone_id = local.cloudflare_dns_zone_id
-  name    = local.xorima_hostnames.json_version_bumper
+  name    = local.xorima_hostnames.release_creator
   value   = local.kubernetes_public_ip
   type    = "A"
   ttl     = 1
