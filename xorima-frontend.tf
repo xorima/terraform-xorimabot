@@ -50,7 +50,7 @@ module "xorima-json-version-bumper" {
   source             = "./modules/json_version_bumper"
   kube_config        = local.kube_config
   namespace          = kubernetes_namespace.xorima-frontend.metadata[0].name
-  app_version        = local.app_version.jsonversionbumper
+  app_version        = local.app_version.json_version_bumper
   github_secret_name = kubernetes_secret.webhook-github-xorima-frontend.metadata[0].name
   hostname           = local.xorima_hostnames.json_version_bumper
   target_repo        = "xorima/terraform-xorimabot"
