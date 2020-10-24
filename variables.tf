@@ -79,6 +79,7 @@ variable "app_hostname_prefix" {
   type = object({
     label_validator     = string
     json_version_bumper = string
+    release_creator     = string
   })
 }
 
