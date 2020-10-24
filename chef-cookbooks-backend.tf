@@ -14,10 +14,10 @@ resource "kubernetes_secret" "xorimabot-github-chef-cookbooks-backend" {
   }
 
   data = {
-    github_token    = var.github_xorimabot_token
-    github_git_name = var.github_xorimabot_name
-    github_email    = var.github_xorimabot_email
-    github_username = var.github_xorimabot_username
+    github_token    = var.github_user_token
+    github_git_name = var.github_user_config.name
+    github_email    = var.github_user_config.email
+    github_username = var.github_user_config.username
   }
 }
 

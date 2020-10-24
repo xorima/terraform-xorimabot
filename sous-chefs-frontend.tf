@@ -1,3 +1,10 @@
+locals {
+  sous_chefs_hostnames = {
+    label_validator     = "${var.app_hostname_prefix.label_validator}.souschefs.${local.domain_config.base_domain}"
+    json_version_bumper = "${var.app_hostname_prefix.json_version_bumper}.souschefs.${local.domain_config.base_domain}"
+  }
+}
+
 resource "kubernetes_namespace" "sous-chefs-frontend" {
   metadata {
     labels = {
@@ -14,8 +21,8 @@ resource "kubernetes_secret" "webhook-github-sous-chef-frontend" {
   }
 
   data = {
-    hmac_secret_token = var.github_hmac_secret_token
-    github_token      = var.github_xorimabot_token
+    hmac_secret_token = var.github_hmac_secret_sous_chefs
+    github_token      = var.github_user_token
   }
 }
 
@@ -97,7 +104,7 @@ resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
   }
   spec {
     rule {
-      host = "${var.host_labelvalidator}.${var.cloudflare_dns_zone_filer}"
+      host = local.sous_chefs_hostnames.label_validator
       http {
         path {
           path = "/"
@@ -109,7 +116,7 @@ resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
       }
     }
     tls {
-      hosts       = ["${var.host_labelvalidator}.${var.cloudflare_dns_zone_filer}"]
+      hosts       = [local.sous_chefs_hostnames.label_validator]
       secret_name = "labelvalidator-tls"
     }
 
@@ -118,13 +125,11 @@ resource "kubernetes_ingress" "labelvalidator-sous-chef-frontend" {
 
 resource "cloudflare_record" "labelvalidator-sous-chef-frontend" {
   zone_id = local.cloudflare_dns_zone_id
-  name    = var.host_labelvalidator
+  name    = local.sous_chefs_hostnames.label_validator
   value   = local.kubernetes_public_ip
   type    = "A"
   ttl     = 1
 }
-
-
 
 resource "kubernetes_deployment" "jsonversionbumper-sous-chef-frontend" {
   metadata {
@@ -215,7 +220,7 @@ resource "kubernetes_ingress" "jsonversionbumper-sous-chef-frontend" {
   }
   spec {
     rule {
-      host = "${var.host_jsonversionbumper}.${var.cloudflare_dns_zone_filer}"
+      host = local.sous_chefs_hostnames.json_version_bumper
       http {
         path {
           path = "/"
@@ -227,7 +232,7 @@ resource "kubernetes_ingress" "jsonversionbumper-sous-chef-frontend" {
       }
     }
     tls {
-      hosts       = ["${var.host_jsonversionbumper}.${var.cloudflare_dns_zone_filer}"]
+      hosts       = [local.sous_chefs_hostnames.json_version_bumper]
       secret_name = "jsonversionbumper-tls"
     }
 
@@ -236,7 +241,7 @@ resource "kubernetes_ingress" "jsonversionbumper-sous-chef-frontend" {
 
 resource "cloudflare_record" "jsonversionbumper-sous-chef-frontend" {
   zone_id = local.cloudflare_dns_zone_id
-  name    = var.host_jsonversionbumper
+  name    = local.sous_chefs_hostnames.json_version_bumper
   value   = local.kubernetes_public_ip
   type    = "A"
   ttl     = 1
