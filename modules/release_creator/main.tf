@@ -23,7 +23,7 @@ resource "kubernetes_deployment" "deployment" {
       spec {
         container {
           name  = "release-creator"
-          image = "xorima/release_creator:${var.app_version}"
+          image = "xorima/releasecreator:${var.app_version}"
 
           env {
             name = "SECRET_TOKEN"
