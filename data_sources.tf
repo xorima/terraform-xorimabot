@@ -5,8 +5,8 @@ data "cloudflare_zones" "zone" {
   }
 }
 locals {
-  cloudflare_dns_zone_id   = data.cloudflare_zones.zone.zones.0.id
-  cloudflare_dns_zone_name = data.cloudflare_zones.zone.zones.0.name
+  cloudflare_dns_zone_id   = data.cloudflare_zones.zone.zones.id
+  cloudflare_dns_zone_name = data.cloudflare_zones.zone.zones.name
 }
 
 data "kubernetes_service" "nginx-ingress" {
