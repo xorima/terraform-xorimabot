@@ -39,7 +39,7 @@ resource "kubernetes_deployment" "deployment" {
             name = "GITHUB_TOKEN"
             value_from {
               secret_key_ref {
-                name = github_secret_name
+                name = var.github_secret_name
                 key  = "github_admin_token"
               }
             }
