@@ -30,7 +30,7 @@ resource "kubernetes_secret" "webhook-github-sous-chef-frontend" {
 module "sous-chefs-label_validator" {
   source             = "./modules/label_validator"
   kube_config        = local.kube_config
-  namespace          = kubernetes_namespace.xorima-frontend.metadata[0].name
+  namespace          = kubernetes_namespace.sous-chefs-frontend.metadata[0].name
   app_version        = local.app_version.labelvalidator
   github_secret_name = kubernetes_secret.webhook-github-sous-chef-frontend.metadata[0].name
   hostname           = local.sous_chefs_hostnames.label_validator
