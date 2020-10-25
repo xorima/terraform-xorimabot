@@ -3,6 +3,7 @@ locals {
     label_validator     = "${var.app_hostname_prefix.label_validator}.xorima.${local.domain_config.base_domain}"
     json_version_bumper = "${var.app_hostname_prefix.json_version_bumper}.xorima.${local.domain_config.base_domain}"
     release_creator     = "${var.app_hostname_prefix.release_creator}.xorima.${local.domain_config.base_domain}"
+    changelog_reset     = "${var.app_hostname_prefix.changelog_reset}.xorima.${local.domain_config.base_domain}"
   }
 }
 
