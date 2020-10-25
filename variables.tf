@@ -81,6 +81,7 @@ variable "app_hostname_prefix" {
     json_version_bumper = string
     release_creator     = string
     changelog_reset     = string
+    changelog_validator = string
   })
 }
 
