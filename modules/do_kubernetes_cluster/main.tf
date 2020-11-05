@@ -15,4 +15,9 @@ resource "digitalocean_kubernetes_cluster" "cluster" {
     min_nodes  = var.min_nodes
     max_nodes  = var.max_nodes
   }
+  lifecycle {
+    ignore_changes = [
+      version
+    ]
+  }
 }
