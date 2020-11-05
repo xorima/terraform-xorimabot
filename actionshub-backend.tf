@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "actionshub-backend" {
   }
 }
 
-resource "kubernetes_secret" "xorimabot-github-sous-chef-backend" {
+resource "kubernetes_secret" "xorimabot-github-actionshub-backend" {
   metadata {
     name      = "xorimabot-github"
     namespace = kubernetes_namespace.actionshub-backend.metadata[0].name
@@ -29,7 +29,7 @@ module "actionshub-label-manager" {
   resource_name            = "github-label-manager"
   cronjob_schedule         = "0 16 * * *"
   app_version              = local.app_version.github_label_manager
-  github_token_secret_name = kubernetes_secret.xorimabot-github-sous-chef-backend.metadata[0].name
+  github_token_secret_name = kubernetes_secret.xorimabot-github-actionshub-backend.metadata[0].name
   source_repo_owner        = "actionshub"
   source_repo_path         = "labels/cookbook"
   destination_repo_owner   = "actionshub"
@@ -43,7 +43,7 @@ module "actionshub-file-manager-action" {
   resource_name            = "github-file-manager-ide"
   cronjob_schedule         = "0 12 * * *"
   app_version              = local.app_version.github_file_manager
-  github_token_secret_name = kubernetes_secret.xorimabot-github-sous-chef-backend.metadata[0].name
+  github_token_secret_name = kubernetes_secret.xorimabot-github-actionshub-backend.metadata[0].name
   source_repo_owner        = "actionshub"
   source_repo_path         = "standardfiles/action"
   destination_repo_owner   = "actionshub"
