@@ -68,7 +68,7 @@ variable "github_admin_sous_chefs_token" {
 variable "github_hmac_secret_sous_chefs" {
   type = string
 }
-variable "github_hmac_secret_actions_hub" {
+variable "github_hmac_secret_actionshub" {
   type = string
 }
 variable "github_hmac_secret_xorima" {
