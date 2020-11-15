@@ -77,14 +77,24 @@ variable "github_hmac_secret_xorima" {
 
 variable "app_hostname_prefix" {
   type = object({
-    label_validator     = string
-    json_version_bumper = string
-    release_creator     = string
-    changelog_reset     = string
-    changelog_validator = string
+    label_validator               = string
+    json_version_bumper           = string
+    release_creator               = string
+    changelog_reset               = string
+    changelog_validator           = string
+    cookbook_release_creator      = string
+    cookbook_supermarket_uploader = string
+
   })
 }
 
 locals {
   app_version = jsondecode(file("${path.module}/app_versions.json"))
+}
+
+variable "supermarket_node_name" {
+  type = string
+}
+variable "supermarket_client_key" {
+  type = string
 }
