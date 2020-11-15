@@ -88,3 +88,10 @@ variable "app_hostname_prefix" {
 locals {
   app_version = jsondecode(file("${path.module}/app_versions.json"))
 }
+
+variable "supermarket_node_name" {
+  type = string
+}
+variable "supermarket_client_key" {
+  type = string
+}
