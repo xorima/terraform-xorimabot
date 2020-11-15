@@ -46,6 +46,16 @@ resource "kubernetes_deployment" "deployment" {
           }
 
           env {
+            name = "GIT_USERNAME"
+            value_from {
+              secret_key_ref {
+                name = var.github_secret_name
+                key  = "github_admin_username"
+              }
+            }
+          }
+
+          env {
             name = "NODE_NAME"
             value_from {
               secret_key_ref {

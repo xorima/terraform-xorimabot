@@ -26,15 +26,16 @@ resource "kubernetes_secret" "webhook-github-xorima-frontend" {
   }
 
   data = {
-    hmac_secret_token  = var.github_hmac_secret_xorima
-    github_token       = var.github_user_token
-    github_admin_token = var.github_user_token
+    hmac_secret_token     = var.github_hmac_secret_xorima
+    github_token          = var.github_user_token
+    github_admin_token    = var.github_user_token
+    github_admin_username = var.github_user_config.username
   }
 }
 
 resource "kubernetes_secret" "webhook-supermarket-xorima-frontend" {
   metadata {
-    name      = "github-webhook"
+    name      = "chef-supermarket"
     namespace = kubernetes_namespace.xorima-frontend.metadata[0].name
   }
 
