@@ -40,7 +40,7 @@ module "actionshub-file-manager-action" {
   source                   = "./modules/github_file_manager"
   kube_config              = local.kube_config
   namespace                = kubernetes_namespace.actionshub-backend.metadata[0].name
-  resource_name            = "github-file-manager-ide"
+  resource_name            = "github-file-manager"
   cronjob_schedule         = "0 12 * * *"
   app_version              = local.app_version.github_file_manager
   github_token_secret_name = kubernetes_secret.xorimabot-github-actionshub-backend.metadata[0].name
