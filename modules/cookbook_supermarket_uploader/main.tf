@@ -66,17 +66,18 @@ resource "kubernetes_deployment" "deployment" {
           }
 
 
-          volume {
-            name = "client-key"
-            secret {
-              secret_name = var.supermarket_secret_name
-              items {
-                key  = "client_key"
-                path = "client_key"
-              }
+
+
+        }
+        volume {
+          name = "client-key"
+          secret {
+            secret_name = var.supermarket_secret_name
+            items {
+              key  = "client_key"
+              path = "client_key"
             }
           }
-
         }
       }
     }
