@@ -54,9 +54,9 @@ module "xorima-deployment-status-slack-notifier" {
   app_version        = local.app_version.deployment_status_slack_notifier
   github_secret_name = kubernetes_secret.webhook-github-xorima-frontend.metadata[0].name
   hostname           = local.xorima_hostnames.deployment_status_slack_notifier
-  success_webhook    = var.sous_chefs_slack_notifier.success_webhooks
-  failure_webhook    = var.sous_chefs_slack_notifier.failure_webhooks
-  error_webhook      = var.sous_chefs_slack_notifier.failure_webhooks
+  success_webhooks   = var.sous_chefs_slack_notifier.success_webhooks
+  failure_webhooks   = var.sous_chefs_slack_notifier.failure_webhooks
+  error_webhooks     = var.sous_chefs_slack_notifier.failure_webhooks
 }
 
 
