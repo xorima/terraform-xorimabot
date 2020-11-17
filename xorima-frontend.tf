@@ -1,12 +1,13 @@
 locals {
   xorima_hostnames = {
-    label_validator               = "${var.app_hostname_prefix.label_validator}.xorima.${local.domain_config.base_domain}"
-    json_version_bumper           = "${var.app_hostname_prefix.json_version_bumper}.xorima.${local.domain_config.base_domain}"
-    release_creator               = "${var.app_hostname_prefix.release_creator}.xorima.${local.domain_config.base_domain}"
-    changelog_reset               = "${var.app_hostname_prefix.changelog_reset}.xorima.${local.domain_config.base_domain}"
-    changelog_validator           = "${var.app_hostname_prefix.changelog_validator}.xorima.${local.domain_config.base_domain}"
-    cookbook_release_creator      = "${var.app_hostname_prefix.cookbook_release_creator}.xorima.${local.domain_config.base_domain}"
-    cookbook_supermarket_uploader = "${var.app_hostname_prefix.cookbook_supermarket_uploader}.xorima.${local.domain_config.base_domain}"
+    label_validator                  = "${var.app_hostname_prefix.label_validator}.xorima.${local.domain_config.base_domain}"
+    json_version_bumper              = "${var.app_hostname_prefix.json_version_bumper}.xorima.${local.domain_config.base_domain}"
+    release_creator                  = "${var.app_hostname_prefix.release_creator}.xorima.${local.domain_config.base_domain}"
+    changelog_reset                  = "${var.app_hostname_prefix.changelog_reset}.xorima.${local.domain_config.base_domain}"
+    changelog_validator              = "${var.app_hostname_prefix.changelog_validator}.xorima.${local.domain_config.base_domain}"
+    cookbook_release_creator         = "${var.app_hostname_prefix.cookbook_release_creator}.xorima.${local.domain_config.base_domain}"
+    cookbook_supermarket_uploader    = "${var.app_hostname_prefix.cookbook_supermarket_uploader}.xorima.${local.domain_config.base_domain}"
+    deployment_status_slack_notifier = "${var.app_hostname_prefix.deployment_status_slack_notifier}.xorima.${local.domain_config.base_domain}"
   }
 }
 
@@ -45,6 +46,27 @@ resource "kubernetes_secret" "webhook-supermarket-xorima-frontend" {
   }
 }
 
+
+module "xorima-deployment-status-slack-notifier" {
+  source             = "./modules/deployment_status_slack_notifier"
+  kube_config        = local.kube_config
+  namespace          = kubernetes_namespace.xorima-frontend.metadata[0].name
+  app_version        = local.app_version.deployment_status_slack_notifier
+  github_secret_name = kubernetes_secret.webhook-github-xorima-frontend.metadata[0].name
+  hostname           = local.xorima_hostnames.deployment_status_slack_notifier
+  success_webhook    = var.sous_chefs_slack_notifier.success_webhooks
+  failure_webhook    = var.sous_chefs_slack_notifier.failure_webhooks
+  error_webhook      = var.sous_chefs_slack_notifier.failure_webhooks
+}
+
+
+resource "cloudflare_record" "deployment-status-slack-notifier-xorima-frontend" {
+  zone_id = local.cloudflare_dns_zone_id
+  name    = local.xorima_hostnames.deployment_status_slack_notifier
+  value   = local.kubernetes_public_ip
+  type    = "A"
+  ttl     = 1
+}
 
 module "xorima-cookbook_release_creator" {
   source             = "./modules/cookbook_release_creator"

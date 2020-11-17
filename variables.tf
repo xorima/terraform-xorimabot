@@ -75,15 +75,23 @@ variable "github_hmac_secret_xorima" {
   type = string
 }
 
+variable "sous_chefs_slack_notifier" {
+  type = object({
+    success_webhooks = string
+    failure_webhooks = string
+  })
+}
+
 variable "app_hostname_prefix" {
   type = object({
-    label_validator               = string
-    json_version_bumper           = string
-    release_creator               = string
-    changelog_reset               = string
-    changelog_validator           = string
-    cookbook_release_creator      = string
-    cookbook_supermarket_uploader = string
+    label_validator                  = string
+    json_version_bumper              = string
+    release_creator                  = string
+    changelog_reset                  = string
+    changelog_validator              = string
+    cookbook_release_creator         = string
+    cookbook_supermarket_uploader    = string
+    deployment_status_slack_notifier = string
 
   })
 }
