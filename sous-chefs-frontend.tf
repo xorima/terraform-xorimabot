@@ -69,7 +69,7 @@ module "sous-chefs-cookbook-release-validator" {
   kube_config        = local.kube_config
   namespace          = kubernetes_namespace.sous-chefs-frontend.metadata[0].name
   app_version        = local.app_version.cookbook_release_validator
-  github_secret_name = kubernetes_secret.webhook-github-sous-chefs-frontend.metadata[0].name
+  github_secret_name = kubernetes_secret.webhook-github-sous-chef-frontend.metadata[0].name
   hostname           = local.sous_chefs_hostnames.cookbook_release_validator
 }
 
@@ -86,7 +86,7 @@ module "sous-chefs-deployment-status-slack-notifier" {
   kube_config        = local.kube_config
   namespace          = kubernetes_namespace.sous-chefs-frontend.metadata[0].name
   app_version        = local.app_version.deployment_status_slack_notifier
-  github_secret_name = kubernetes_secret.webhook-github-sous-chefs-frontend.metadata[0].name
+  github_secret_name = kubernetes_secret.webhook-github-sous-chef-frontend.metadata[0].name
   hostname           = local.sous_chefs_hostnames.deployment_status_slack_notifier
   success_webhooks   = var.sous_chefs_slack_notifier.success_webhooks
   failure_webhooks   = var.sous_chefs_slack_notifier.failure_webhooks
@@ -107,7 +107,7 @@ module "sous-chefs-cookbook_release_creator" {
   kube_config        = local.kube_config
   namespace          = kubernetes_namespace.sous-chefs-frontend.metadata[0].name
   app_version        = local.app_version.cookbook_release_creator
-  github_secret_name = kubernetes_secret.webhook-github-sous-chefs-frontend.metadata[0].name
+  github_secret_name = kubernetes_secret.webhook-github-sous-chef-frontend.metadata[0].name
   hostname           = local.sous_chefs_hostnames.cookbook_release_creator
 }
 
@@ -125,7 +125,7 @@ module "sous-chefs-cookbook_supermarket_uploader" {
   kube_config             = local.kube_config
   namespace               = kubernetes_namespace.sous-chefs-frontend.metadata[0].name
   app_version             = local.app_version.cookbook_supermarket_uploader
-  github_secret_name      = kubernetes_secret.webhook-github-sous-chefs-frontend.metadata[0].name
+  github_secret_name      = kubernetes_secret.webhook-github-sous-chef-frontend.metadata[0].name
   supermarket_secret_name = kubernetes_secret.webhook-supermarket-sous-chefs-frontend.metadata[0].name
   hostname                = local.sous_chefs_hostnames.cookbook_supermarket_uploader
 }
@@ -145,7 +145,7 @@ module "sous-chefs-changelog-reset" {
   kube_config        = local.kube_config
   namespace          = kubernetes_namespace.sous-chefs-frontend.metadata[0].name
   app_version        = local.app_version.changelog_reset
-  github_secret_name = kubernetes_secret.webhook-github-sous-chefs-frontend.metadata[0].name
+  github_secret_name = kubernetes_secret.webhook-github-sous-chef-frontend.metadata[0].name
   hostname           = local.sous_chefs_hostnames.changelog_reset
 }
 
@@ -162,7 +162,7 @@ module "sous-chefs-changelog-validator" {
   kube_config        = local.kube_config
   namespace          = kubernetes_namespace.sous-chefs-frontend.metadata[0].name
   app_version        = local.app_version.changelog_validator
-  github_secret_name = kubernetes_secret.webhook-github-sous-chefs-frontend.metadata[0].name
+  github_secret_name = kubernetes_secret.webhook-github-sous-chef-frontend.metadata[0].name
   hostname           = local.sous_chefs_hostnames.changelog_validator
 }
 
