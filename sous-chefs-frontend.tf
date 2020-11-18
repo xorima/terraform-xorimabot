@@ -6,7 +6,7 @@ locals {
     cookbook_release_creator         = "${var.app_hostname_prefix.cookbook_release_creator}.souschefs.${local.domain_config.base_domain}"
     cookbook_supermarket_uploader    = "${var.app_hostname_prefix.cookbook_supermarket_uploader}.souschefs.${local.domain_config.base_domain}"
     deployment_status_slack_notifier = "${var.app_hostname_prefix.deployment_status_slack_notifier}.souschefs.${local.domain_config.base_domain}"
-    cookbook_release_validator     = "${var.app_hostname_prefix.cookbook_release_validator}.souschefs.${local.domain_config.base_domain}"
+    cookbook_release_validator       = "${var.app_hostname_prefix.cookbook_release_validator}.souschefs.${local.domain_config.base_domain}"
   }
 }
 
