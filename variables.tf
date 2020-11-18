@@ -92,6 +92,7 @@ variable "app_hostname_prefix" {
     cookbook_release_creator         = string
     cookbook_supermarket_uploader    = string
     deployment_status_slack_notifier = string
+    cookbook_release_validator       = string
 
   })
 }

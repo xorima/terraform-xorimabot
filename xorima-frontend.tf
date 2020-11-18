@@ -8,6 +8,7 @@ locals {
     cookbook_release_creator         = "${var.app_hostname_prefix.cookbook_release_creator}.xorima.${local.domain_config.base_domain}"
     cookbook_supermarket_uploader    = "${var.app_hostname_prefix.cookbook_supermarket_uploader}.xorima.${local.domain_config.base_domain}"
     deployment_status_slack_notifier = "${var.app_hostname_prefix.deployment_status_slack_notifier}.xorima.${local.domain_config.base_domain}"
+    "cookbook_release_validator"     = "${var.app_hostname_prefix.cookbook_release_validator}.xorima.${local.domain_config.base_domain}"
   }
 }
 
@@ -46,6 +47,24 @@ resource "kubernetes_secret" "webhook-supermarket-xorima-frontend" {
   }
 }
 
+
+
+module "xorima-cookbook-release-validator" {
+  source             = "./modules/cookbook_release_validator"
+  kube_config        = local.kube_config
+  namespace          = kubernetes_namespace.xorima-frontend.metadata[0].name
+  app_version        = local.app_version.cookbook_release_validator
+  github_secret_name = kubernetes_secret.webhook-github-xorima-frontend.metadata[0].name
+  hostname           = local.xorima_hostnames.cookbook_release_validator
+}
+
+resource "cloudflare_record" "cookbook-release-validator-xorima-frontend" {
+  zone_id = local.cloudflare_dns_zone_id
+  name    = local.xorima_hostnames.cookbook_release_validator
+  value   = local.kubernetes_public_ip
+  type    = "A"
+  ttl     = 1
+}
 
 module "xorima-deployment-status-slack-notifier" {
   source             = "./modules/deployment_status_slack_notifier"
