@@ -31,7 +31,7 @@ module "actionshub-label-manager" {
   app_version              = local.app_version.github_label_manager
   github_token_secret_name = kubernetes_secret.xorimabot-github-actionshub-backend.metadata[0].name
   source_repo_owner        = "actionshub"
-  source_repo_path         = "labels/cookbook"
+  source_repo_path         = "labels/action"
   destination_repo_owner   = "actionshub"
   destination_repo_topics  = "action,github-action"
 }
