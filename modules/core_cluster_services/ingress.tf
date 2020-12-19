@@ -59,4 +59,8 @@ resource "helm_release" "nginx-ingress" {
     name  = "config.server-tokens"
     value = false
   }
+  set {
+    name  = "controller.kind"
+    value = "daemonset"
+  }
 }
