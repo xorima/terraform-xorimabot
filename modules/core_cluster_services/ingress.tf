@@ -60,7 +60,7 @@ resource "helm_release" "nginx-ingress" {
     value = false
   }
   set {
-    name = "controller.kind"
+    name  = "controller.kind"
     value = "daemonset"
   }
 }

@@ -1,6 +1,6 @@
 
 variable "ssl_ciphers" {
-  type = list
+  type = list(any)
   default = [
     "ECDHE-ECDSA-CHACHA20-POLY1305",
     "ECDHE-ECDSA-AES128-GCM-SHA256",
