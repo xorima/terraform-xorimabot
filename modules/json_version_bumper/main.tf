@@ -83,6 +83,7 @@ resource "kubernetes_ingress" "ingress" {
     namespace = var.namespace
     annotations = {
       "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
+      "kubernetes.io/ingress.class"    = "nginx"
     }
   }
   spec {
