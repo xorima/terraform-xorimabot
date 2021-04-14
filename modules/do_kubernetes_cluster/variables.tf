@@ -16,10 +16,10 @@ variable "default_node_size" {
 
 variable "min_nodes" {
   type    = number
-  default = 2
+  default = 3
 }
 
 variable "max_nodes" {
   type    = number
-  default = 3
+  default = 4
 }
